@@ -10,7 +10,6 @@ class AgentRuntime:
         self.max_tokens = max_tokens
         self.terminal_names = set(terminal_names or [])
 
-    # ---------------- generic utils ----------------
     @staticmethod
     def get(item, key, default=None):
         if hasattr(item, key):
@@ -49,7 +48,6 @@ class AgentRuntime:
         except Exception:
             return ""
 
-    # ---------------- tool signature + execution ----------------
     @staticmethod
     def introspect_tool_signatures(tool_impl):
         sigs = {}
@@ -99,8 +97,6 @@ class AgentRuntime:
             func = getattr(self.tool_impl, name)
             return func(**args) if args else func()
         return {"ok": False, "error": f"unknown tool {name}"}
-
-    # ---------------- loops ----------------
 
     def fc_agentic_loop(self, model, base_messages, agentic_tools, max_steps=8, allow_repeat=False):
         messages = list(base_messages)
