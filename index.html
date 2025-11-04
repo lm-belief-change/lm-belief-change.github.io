@@ -45,12 +45,12 @@
               <div class="is-size-5 publication-authors">
                 <span class="author-block">
                   <a href="https://jiayigeng.github.io/">Jiayi Geng</a><sup>1,2+*</sup>,
-                  <a href="https://howard50b.github.io/">Howard Chen</a><sup>2+</sup>,
-                  <a href="https://theryanl.github.io/">Ryan Liu</a><sup>2+</sup>,
+                  <a href="https://howard50b.github.io/">Howard Chen</a><sup>2+*</sup>,
+                  <a href="https://theryanl.github.io/">Ryan Liu</a><sup>2+*</sup>,
                   <a href="https://manoelhortaribeiro.github.io/">Manoel Horta Ribeiro</a><sup>2</sup>,
                   <a href="https://www.robbwiller.org/">Robb Willer</a><sup>3</sup>,
                   <a href="http://www.phontron.com/">Graham Neubig</a><sup>1*</sup>,
-                  <a href="https://cocosci.princeton.edu/tom/index.php">Tom Griffiths</a><sup>2*</sup>.
+                  <a href="https://cocosci.princeton.edu/tom/index.php">Thomas L. Griffiths</a><sup>2*</sup>.
                 </span>
               </div>
 
@@ -59,14 +59,14 @@
                 <span class="author-block"><sup>2</sup>Princeton University</span>
                 <span class="author-block"><sup>3</sup>Stanford University</span><br />
                 <span class="author-block"><sup>*</sup>Corresponding authors.</span>
-                <span class="author-block"><sup>+</sup>Equal contribution.</span><br />
-                <span class="author-block">{ogeng,gneubig}@andrew.cmu.edu; tomg@princeton.edu</span>
+                <span class="author-block"><sup>+</sup>Co-first authors.</span><br />
+                <span class="author-block">{ogeng, gneubig}@andrew.cmu.edu; tomg@princeton.edu</span>
               </div>
 
               <div class="column has-text-centered">
                 <div class="publication-links">
                   <span class="link-block">
-                    <a href="https://arxiv.org/pdf/2307.13854.pdf"
+                    <a href="https://arxiv.org/pdf/2511.01805"
                       class="external-link button is-normal is-rounded is-dark">
                       <span class="icon"><i class="fas fa-file-pdf"></i></span>
                       <span>Paper</span>
@@ -79,13 +79,6 @@
                       <span>Code</span>
                     </a>
                   </span>
-                  <span class="link-block">
-                    <a href="https://github.com/lm-belief-change/lm-belief-change/blob/main/data/test.raw.json"
-                      class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon"><i class="far fa-images"></i></span>
-                      <span>Data</span>
-                    </a>
-                  </span>
                 </div>
               </div>
 
@@ -95,14 +88,175 @@
       </div>
     </section>
 
-    <!-- Only keep overview image -->
+    <!-- Teaser -->
     <section class="hero teaser">
       <div class="container is-max-desktop">
         <div class="hero-body">
-          <img src="./static/images/teaser.png" />
+          <img src="./static/images/teaser.png" alt="Teaser figure showing belief shifts in language models" />
           <h2 class="subtitle has-text-centered">
-            Accumulating context causes LM's belief to change.
+            <strong>Accumulating context causes language model beliefs to shift.</strong> As LM assistants engage in extended conversations (left) or read longer texts (right), their stated beliefs and behaviors change substantially. GPT-5 exhibits a 54.7% shift in stated beliefs after 10 rounds of discussion about moral dilemmas and safety queries, while Grok-4 shows a 27.2% shift on political issues after reading texts from opposing viewpoints. These shifts occur both through intentional persuasion (debate, targeted arguments) and non-intentional exposure (passive reading, research), revealing a hidden risk as models accumulate experience in persistent AI systems.
           </h2>
+        </div>
+      </div>
+    </section>
+
+    <!-- Overview -->
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Overview</h2>
+            <div class="content has-text-justified">
+              <p>
+                As language model assistants become more autonomous with improved memory and context capabilities, they increasingly accumulate text in their context windows without explicit user intervention. This paper reveals a critical hidden risk: <strong>the belief profiles of models—their understanding of the world as manifested in their responses and actions—may silently change as context accumulates</strong>.
+              </p>
+              <p>
+                We systematically investigate how accumulating context through two primary mechanisms—<strong>talking</strong> (engaging in multi-turn conversations) and <strong>reading</strong> (processing extended texts)—can shift model beliefs. Our framework evaluates both <em>stated beliefs</em> (explicit responses to questions) and <em>behaviors</em> (actions taken through tool use in agentic systems).
+              </p>
+              <p>
+                <strong>Key findings:</strong>
+              </p>
+              <ul>
+                <li><strong>Highly malleable beliefs:</strong> GPT-5 exhibits a 54.7% shift in stated beliefs after 10 rounds of discussion about moral dilemmas and safety queries</li>
+                <li><strong>Exposure effects:</strong> Grok-4 shows a 27.2% shift on political issues after reading texts from opposing positions</li>
+                <li><strong>Behavior alignment:</strong> Belief shifts are reflected in actual behaviors in agentic systems, though with partial misalignment</li>
+                <li><strong>Cumulative impact:</strong> Longer conversations and deeper reading lead to more pronounced shifts, with effects varying by model and content type</li>
+              </ul>
+              <p>
+                These findings expose fundamental concerns about the reliability of LMs in long-term, real-world deployments, where user trust grows with continued interaction even as hidden belief drift accumulates. The malleability we document suggests that models' opinions and actions can become unreliable after extended use—a critical challenge for persistent AI systems.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Results -->
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column is-full">
+            <h2 class="title is-3 has-text-centered">Main Results</h2>
+            
+            <div class="content has-text-justified">
+              <h3 class="title is-4">Do LM assistants change their beliefs with accumulating context?</h3>
+              <p>
+                <strong>Yes, systematically and substantially.</strong> Our experiments reveal that LM assistants exhibit significant changes in both stated beliefs and behaviors across multiple models and contexts. The table below shows aggregate shift percentages across different tasks and models:
+              </p>
+              
+              <div class="has-text-centered">
+                <img src="./static/images/table1.png" alt="Main results table showing belief shift percentages" style="max-width: 100%; height: auto; margin: 20px 0;" />
+              </div>
+
+              <h4 class="title is-5">Intentional vs. Non-Intentional Shifts</h4>
+              <p>
+                <strong>Intentional tasks</strong> (debate and persuasion) produce larger immediate shifts:
+              </p>
+              <ul>
+                <li>GPT-5 shows the highest susceptibility to persuasion, with <strong>72.7% belief shift</strong> when exposed to information-based arguments</li>
+                <li>Claude-4-Sonnet exhibits more moderate shifts (24.9-27.2%) in intentional settings</li>
+                <li>Persuasion techniques matter: information and empathy-based approaches are most effective</li>
+              </ul>
+
+              <p>
+                <strong>Non-intentional tasks</strong> (reading and research) show smaller but meaningful shifts:
+              </p>
+              <ul>
+                <li>Grok-4 is most susceptible to passive exposure, showing <strong>27.2% shift</strong> after in-depth reading</li>
+                <li>Research tasks produce smaller shifts (1.7-10.8%) due to more diverse information gathering</li>
+                <li>Open-source models (GPT-OSS-120B, DeepSeek-V3.1) show uniformly low sensitivity in non-intentional settings</li>
+              </ul>
+
+              <h4 class="title is-5">Stated Belief vs. Behavior</h4>
+              <p>
+                We observe <strong>partial misalignment</strong> between belief shifts and behavioral changes:
+              </p>
+              <ul>
+                <li>Stated beliefs shift more readily than behaviors (e.g., GPT-5: 54.7% vs 40.6% in debate)</li>
+                <li>Behavioral changes grow with longer interactions, even when stated beliefs stabilize early</li>
+                <li>This divergence suggests models may state belief changes without fully enacting them, or vice versa</li>
+              </ul>
+
+              <h4 class="title is-5">Effect of Context Length</h4>
+              <p>
+                <strong>In conversations:</strong> Stated beliefs change early (within 2-4 rounds), while behavioral changes accumulate over longer interactions (up to 10 rounds).
+              </p>
+              <p>
+                <strong>In reading:</strong> 
+              </p>
+              <ul>
+                <li>Conservative topics show cumulative effects—longer reading (5k → 80k tokens) leads to progressively larger shifts</li>
+                <li>Progressive topics show early emergence—shifts appear at 5k tokens and plateau, remaining stable even with 80k tokens</li>
+                <li>This asymmetry suggests different mechanisms for belief formation depending on content alignment with initial positions</li>
+              </ul>
+
+              <h4 class="title is-5">Model Differences</h4>
+              <p>
+                Different models show distinct vulnerability patterns:
+              </p>
+              <ul>
+                <li><strong>GPT-5:</strong> Most affected by explicit persuasion; moderately affected by passive exposure</li>
+                <li><strong>Claude-4-Sonnet:</strong> More vulnerable to prolonged exposure than persuasion; shows largest shifts in reading tasks</li>
+                <li><strong>Grok-4:</strong> Highest overall susceptibility to passive reading (27.2%)</li>
+                <li><strong>Open-source models:</strong> Generally more robust but still show moderate shifts under debate (24.4-44.4%)</li>
+              </ul>
+
+              <h4 class="title is-5">Information vs. Exposure Effects</h4>
+              <p>
+                Our embedding analysis reveals that <strong>belief shifts are not driven primarily by access to specific topic-relevant information</strong>. When we mask the most semantically relevant sentences, shifts remain largely unchanged. This suggests that shifts emerge from <strong>broader contextual framing</strong> accumulated throughout reading, rather than from exposure to particular facts—consistent with findings that narrow behavioral conditioning can lead to wider alignment drift beyond the intended domain.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Co-first Authors Contribution -->
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Author Contributions</h2>
+            <div class="content has-text-justified">
+              <p>
+                <strong>Jiayi Geng</strong> is responsible for the overall planning and execution of the project including core idea formation, data collection, evaluation protocol design and implementation, experimentation on the intentional tasks, analysis, and core paper writing.
+              </p>
+              <p>
+                <strong>Howard Chen</strong> contributed to the core idea, data collection, experimentation on the non-intentional tasks, analysis and core paper writing.
+              </p>
+              <p>
+                <strong>Ryan Liu</strong> contributed to discussions and experimental exploration, and assisted in paper writing (Related Work).
+              </p>
+              <p>
+                <strong>Manoel Horta Ribeiro</strong> contributed to give feedback on the idea and review the manuscript.
+              </p>
+              <p>
+                <strong>Robb Willer</strong> contributed to the experiment design of the intentional tasks and the evaluation protocol design.
+              </p>
+              <p>
+                <strong>Graham Neubig</strong> contributed overall framing of the project, advised the design of the experiments and evaluation protocols, and contributed to core paper writing.
+              </p>
+              <p>
+                <strong>Thomas L. Griffiths</strong> contributed to the early conceptual development of the project, helping shape the core idea, and advised on the experimental and evaluation protocol design as well as the paper writing.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Acknowledgments -->
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Acknowledgments</h2>
+            <div class="content has-text-justified">
+              <p>
+                This paper was supported by grants from Fujitsu, the Microsoft AFMR, and the NOMIS Foundation. We also thank Izzy Benjamin Gainsburg, Amanda Bertsch, Lindia Tjuatja, Lintang Sutawika, Yueqi Song, and Emily Xiao for their valuable feedback and discussion.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -112,7 +266,12 @@
       <div class="container is-max-desktop content">
         <h2 class="title">BibTeX</h2>
         <pre><code>
-
+          @article{geng2025accumulating,
+            title={Accumulating Context Changes the Beliefs of Language Models}, 
+            author={Geng, Jiayi and Chen, Howard and Liu, Ryan and Horta Ribeiro, Manoel and Willer, Robb and Neubig, Graham and Griffiths, Thomas L.},
+            journal={arXiv preprint arXiv:2511.01805},
+            year={2025}
+          }
         </code></pre>
       </div>
     </section>
